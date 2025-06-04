@@ -55,7 +55,8 @@ function oneProduct(produit) {
             </article>
 
             <aside>
-                <h2>${produit.titre}</h2>
+                <h2>Description de l'oeuvre : ${produit.titre}</h2>
+                <p>${produit.description}</p>
             </aside>
   `;
     const section = document.querySelector(".detailoeuvre");
