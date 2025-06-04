@@ -16,10 +16,12 @@ function allProducts(produits) {
     for (const produit of produits) {
         const template = `<article>
                 <img src="${produit.image}" alt="Titre produit">
-                <a href="product.html/?${produit._id}">Buy ${produit.shorttitle}</a>
+                <a href="product.html?id=${produit._id}">Buy ${produit.shorttitle}</a>
             </article>
     `;
         const section = document.querySelector(".products");
         section.insertAdjacentHTML("beforeend", template);
+        // const id = $(produit._id);
+        // console.log(id)
     }
 }
