@@ -17,24 +17,19 @@ async function getProduct(id) {
 }
 
 function oneProduct(produit) {
-    const sizes = produit.declinaisons;
-    for (const size of sizes) {
-        taile = size.taille;
-    }
-
-    console.log(taile);
-
+    const ligne = produit.description.split(". ")
+    const extrait = ligne.slice(0,2).join(". ")
     const template = `<article>
                 <figure>
                     <img src="${produit.image}" alt="Titre de l'oeuvre" />
                 </figure>
                 <div>
                     <h1>${produit.titre}</h1>
-                    <p>${produit.description}
+                    <p>${extrait}
                     </p>
                     <div class="price">
                         <p>Acheter pour</p>
-                        <span class="showprice">35.25€</span>
+                        <span class="showprice"></span>
                     </div>
                     <div class="declinaison">
                         <input
@@ -43,12 +38,10 @@ function oneProduct(produit) {
                             id="quantity"
                             placeholder="1"
                             value="1"
-                            minlength="1"
+                            min="1"
+                            max="100"
                         />
-                        <select name="format" id="format">
-                        <option value=""></option>
-                            
-                        </select>
+                        <select name="format" id="format"></select>
                     </div>
                     <a class="button-buy" href="#">Buy ${produit.shorttitle}</a>
                 </div>
@@ -61,5 +54,35 @@ function oneProduct(produit) {
   `;
     const section = document.querySelector(".detailoeuvre");
     section.insertAdjacentHTML("beforeend", template);
-}
 
+    const select = document.querySelector("#format");
+    produit.declinaisons.forEach((element, index) => {
+        const option = document.createElement("option");
+        // console.log(element,index)
+        option.value = index;
+        option.textContent = `${element.taille}`;
+        select.appendChild(option);
+    });
+    const quantite = document.querySelector("#quantity");
+    const prix = document.querySelector(".showprice");
+
+    function prixTotal() {
+        const tailleIndex = select.value;
+        const declinaison = produit.declinaisons[tailleIndex];
+        let nbQuantite = parseInt(quantite.value) || 1;
+
+        if (nbQuantite<1) {
+            nbQuantite=1
+        }
+        if (nbQuantite>100) {
+            nbQuantite=100
+        }
+
+        const total = declinaison.prix * nbQuantite;
+        prix.textContent = `${total.toFixed(2)}€`;
+    }
+
+    select.addEventListener("change", prixTotal);
+    quantite.addEventListener("input", prixTotal);
+    prixTotal();
+}
