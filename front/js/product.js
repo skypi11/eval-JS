@@ -43,7 +43,7 @@ function oneProduct(produit) {
                         />
                         <select name="format" id="format"></select>
                     </div>
-                    <a class="button-buy" href="panier.html">Buy ${produit.shorttitle}</a>
+                    <a class="button-buy" href="#">Buy ${produit.shorttitle}</a>
                 </div>
             </article>
 
@@ -98,5 +98,21 @@ function oneProduct(produit) {
 }
 function ajoutPanier(produit, declinaisonIndex, quantite) {
     let panier = JSON.parse(localStorage.getItem("panier")) || []
-
+    const idProduit = produit._id + "-" + declinaisonIndex
+    const existant = panier.find(item => item.idProduit === idProduit)
+    
+    if(existant){
+        existant.quantite += quantite
+    }else{
+        panier.push({
+            idProduit : idProduit,
+            id : produit.id,
+            image : produit.image,
+            titre : produit.titre,
+            format : produit.declinaisons[declinaisonIndex].taille,
+            prix : produit.declinaisons[declinaisonIndex].prix,
+            quantite : quantite
+        })
+    }
+localStorage.setItem("panier", JSON.stringify(panier))
 }
