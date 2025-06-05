@@ -43,7 +43,7 @@ function oneProduct(produit) {
                         />
                         <select name="format" id="format"></select>
                     </div>
-                    <a class="button-buy" href="#">Buy ${produit.shorttitle}</a>
+                    <a class="button-buy" href="panier.html">Buy ${produit.shorttitle}</a>
                 </div>
             </article>
 
@@ -85,4 +85,18 @@ function oneProduct(produit) {
     select.addEventListener("change", prixTotal);
     quantite.addEventListener("input", prixTotal);
     prixTotal();
+
+    const button = document.querySelector(".button-buy")
+    button.addEventListener("clik",(e)=>{
+        e.preventDefault()
+        const declinaisonIndex = document.querySelector("#format").value
+        const quantite = parseInt(document.querySelector("#quantite").value) || 1
+
+        ajoutPanier(produit, declinaisonIndex, quantite)
+
+    })
+}
+function ajoutPanier(produit, declinaisonIndex, quantite) {
+    let panier = JSON.parse(localStorage.getItem("panier")) || []
+
 }
