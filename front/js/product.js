@@ -87,10 +87,10 @@ function oneProduct(produit) {
     prixTotal();
 
     const button = document.querySelector(".button-buy")
-    button.addEventListener("clik",(e)=>{
+    button.addEventListener("click",(e)=>{
         e.preventDefault()
         const declinaisonIndex = document.querySelector("#format").value
-        const quantite = parseInt(document.querySelector("#quantite").value) || 1
+        const quantite = parseInt(document.querySelector("#quantity").value) || 1
 
         ajoutPanier(produit, declinaisonIndex, quantite)
 
@@ -106,11 +106,10 @@ function ajoutPanier(produit, declinaisonIndex, quantite) {
     }else{
         panier.push({
             idProduit : idProduit,
-            id : produit.id,
+            id : produit._id,
             image : produit.image,
             titre : produit.titre,
             format : produit.declinaisons[declinaisonIndex].taille,
-            prix : produit.declinaisons[declinaisonIndex].prix,
             quantite : quantite
         })
     }
