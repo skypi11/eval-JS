@@ -171,6 +171,7 @@ figure {
     background-color: #f3f3f3;
     width: 100%;
     text-align: center;
+    position: relative;
 }
 
 .detailoeuvre h1,
@@ -277,29 +278,48 @@ article > div > div.price > p {
     line-height: normal;
 }
 /* nouveau css */
+.button-buy {
+    cursor: pointer;
+}
+.button-buy:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+#ajoutPanier{
+    display:none;
+    position:absolute;
+    bottom:20px;
+    right:1px;
+    background:#4caf50;
+    color:#fff;
+    padding:15px 20px;
+    border-radius:8px;
+    z-index:1000;
+    box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.1em;
+}
 .panierH1 {
     text-align: center;
     padding: 20px;
     border-bottom: solid 1px orange;
     max-width: 1440px;
+    margin: auto;
 }
 .panierArticle {
-    height: 180px;
     max-width: 1440px;
     margin: auto;
-    padding: 0 20px;
+    padding: 20px 20px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     justify-items: center;
     align-items: center;
+    gap: 30px;
 
     img {
         height: 180px;
         /* width: 180px; */
     }
-    div{
-
-        input{
+    div {
+        input {
             text-align: center;
         }
     }
@@ -308,8 +328,10 @@ article > div > div.price > p {
     text-align: right;
     padding: 0 20px;
     border-bottom: solid 1px orange;
+    max-width: 1440px;
+    margin: auto;
 }
-.commande>h2{
+.commande > h2 {
     text-align: center;
     padding: 50px 0;
     border-bottom: solid 1px orange;
@@ -320,38 +342,33 @@ article > div > div.price > p {
     padding: 0 20px;
     display: grid;
 
-
-    
-
     form {
-        
-        .input{
+        .input {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             padding-bottom: 30px;
 
-            div{
+            div {
                 display: flex;
                 flex-direction: column;
             }
-            input, label{
+            input,
+            label {
                 font-size: 1.1em;
             }
-
         }
-        .boutton{
+        .boutton {
             text-align: center;
 
-            input{
-            border-style: none;
-            padding:10px 30px;
-            background-color: orange;
-            color: white;
-            font-weight: 900;
-            font-size: 25px;
+            input {
+                border-style: none;
+                padding: 10px 30px;
+                background-color: orange;
+                color: white;
+                font-weight: 900;
+                font-size: 25px;
+            }
         }
-        }
-
     }
 }
