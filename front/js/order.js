@@ -13,7 +13,7 @@ async function getProducts() {
     }
 }
 
-let panier = JSON.parse(localStorage.getItem("panier")) || [];
+const panier = JSON.parse(localStorage.getItem("panier")) || [];
 const panierArticle = document.querySelector(".panierArticle");
 const totalArticle = document.querySelector(".totalArticle");
 
@@ -27,6 +27,7 @@ function afficherPanier(produits) {
         const declinaison = produitPanier.declinaisons.find(
             (d) => d.taille === article.taille
         );
+        const idProduitUnique = produits.find((i)=> i.idProduit === article.idProduit)
         const prix = declinaison ? declinaison.prix : 0;
         prixQuantite = prix * article.quantite;
         total += prixQuantite;
@@ -42,7 +43,7 @@ function afficherPanier(produits) {
                     <input
                         type="number"
                         name="quantity"
-                        id="quantity"
+                        id="${idProduitUnique}"
                         placeholder="1"
                         value="${article.quantite}"
                         min="1"
@@ -57,5 +58,19 @@ function afficherPanier(produits) {
         <p>${quantite} articles pour un montant de ${total.toFixed(2)} €</p>
     `;
 
-
+    // const supprArticle = document.querySelectorAll(`${idProduitUnique}`)
+    function deleteArticle() {
+        const boutonSppr = document.querySelectorAll(".boutonSupprimer")
+        const idProduitUnique = produits.find((i)=> i.idProduit === panier.idProduit)
+        const ind = 
+        boutonSppr.forEach((e) => {
+            e.addEventListener("click",(el)=>{
+                el.preventDefault()
+                localStorage.removeItem(`${idProduitUnique}`)
+                console.log(idProduitUnique)
+            })
+        });
+    }
+    deleteArticle()
 }
+
